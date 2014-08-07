@@ -15,7 +15,7 @@
       Twitchy.bind('.status', 'status');
       Twitchy.bind('.counter', 'clickCount')
       document.querySelector('button').addEventListener('click', function(){
-        Twitchy.trigger('status', 'working!');
+        Twitchy.trigger('status', 'working');
         Twitchy.trigger('clickCount', i += 1);
       });
     </script>
