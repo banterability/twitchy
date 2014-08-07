@@ -5,13 +5,18 @@
   <body>
     <h1>Hello</h1>
     <p>This is a demo page, and it is <span class='status'>not working</span>.</p>
+    <p>(Clicked <span class='counter'>0</span> times)</p>
     <button>Update</button>
+    <p>(Clicked <span class='counter'>0</span> times)</p>
 
     <script src="twitchy.js"></script>
     <script>
+      var i = 0;
       Twitchy.bind('.status', 'status');
+      Twitchy.bind('.counter', 'clickCount')
       document.querySelector('button').addEventListener('click', function(){
         Twitchy.trigger('status', 'working!');
+        Twitchy.trigger('clickCount', i += 1);
       });
     </script>
   </body>
