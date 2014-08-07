@@ -5,9 +5,14 @@
   <body>
     <h1>Hello</h1>
     <p>This is a demo page, and it is <span class='status'>not working</span>.</p>
+    <button>Update</button>
+
     <script src="twitchy.js"></script>
     <script>
-      
+      Twitchy.bind('.status', 'status');
+      document.querySelector('button').addEventListener('click', function(){
+        Twitchy.trigger('status', 'working!');
+      });
     </script>
   </body>
 </html>
