@@ -4,6 +4,7 @@
   </head>
   <body>
     <h1>Hello</h1>
+    <p>The time is <span class='clock'>unknown</span></p>
     <p>This is a demo page, and it is <span class='status'>not working</span>.</p>
     <p>(Clicked <span class='counter'>0</span> times)</p>
     <button>Update</button>
@@ -14,10 +15,18 @@
       var i = 0;
       Twitchy.bind('.status', 'status');
       Twitchy.bind('.counter', 'clickCount')
+      Twitchy.bind('.clock', 'clock')
+
+      // Button demos
       document.querySelector('button').addEventListener('click', function(){
         Twitchy.trigger('status', 'working');
         Twitchy.trigger('clickCount', i += 1);
       });
+
+      // Time demo
+      setInterval(function(){
+        Twitchy.trigger('clock', new Date());
+      }, 1000);
     </script>
   </body>
 </html>
