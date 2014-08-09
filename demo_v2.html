@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  </head>
+  <body>
+    <input id="slider" type="range" min="0" max="100" value="0" step="1">
+    <p>Slider says <span class="display">0</span></p>
+
+    <script src="twitchy_v2.js"></script>
+    <script>
+      Twitchy.input(document.querySelector('#slider'), 'slider');
+      Twitchy.output(document.querySelector('.display'), 'slider');
+    </script>
+  </body>
+</html>
