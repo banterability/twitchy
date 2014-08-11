@@ -16,12 +16,16 @@ var Twitchy = {
     });
     window.dispatchEvent(updateEvent);
   },
-  output: function(selector, connectTo){
+  output: function(selector, connectTo, callback){
     var elements = document.querySelectorAll(selector);
+    var eventCallback = callback || this._defaultOutputCallback;
     [].forEach.call(elements, function(el){
       window.addEventListener('update:' + connectTo, function(ev){
-        el.textContent = ev.detail.value;
+        eventCallback(ev, el);
       }, false);
     });
+  },
+  _defaultOutputCallback: function(ev, el){
+    el.textContent = ev.detail.value;
   }
 };
