@@ -1,27 +1,45 @@
 var Twitchy = {
-  input: function(selector, connectTo, callback){
-    var elements = document.querySelectorAll(selector);
-    var eventCallback = callback || this._defaultInputCallback;
+  input: function(options){
+    var bindTo, callback, channel, elements, eventCallback, selector;
+
+    options = options || {};
+    bindTo = options.bindTo || 'input';
+    callback = options.callback || this._defaultInputCallback;
+    channel = options.channel;
+    selector = options.selector;
+
+    elements = document.querySelectorAll(selector);
+
     [].forEach.call(elements, function(el){
-      el.addEventListener('input', function(ev){
-        eventCallback(ev, connectTo);
+      el.addEventListener(bindTo, function(ev){
+        callback(ev, channel);
       }, false);
     });
   },
-  _defaultInputCallback: function(ev, connectTo){
+  _defaultInputCallback: function(ev, channel){
     var updateEvent, newValue;
+
     newValue = ev.currentTarget.value;
-    updateEvent = new CustomEvent('update:' + connectTo, {
+    updateEvent = new CustomEvent('update:' + channel, {
       detail: {value: newValue}
     });
+
     window.dispatchEvent(updateEvent);
   },
-  output: function(selector, connectTo, callback){
-    var elements = document.querySelectorAll(selector);
-    var eventCallback = callback || this._defaultOutputCallback;
+  output: function(options){
+    var callback, channel, elements, eventName, selector;
+
+    options = options || {};
+    callback = options.callback || this._defaultOutputCallback;
+    channel = options.channel;
+    selector = options.selector;
+
+    elements = document.querySelectorAll(selector);
+    eventName = 'update:' + channel;
+
     [].forEach.call(elements, function(el){
-      window.addEventListener('update:' + connectTo, function(ev){
-        eventCallback(ev, el);
+      window.addEventListener(eventName, function(ev){
+        callback(ev, el);
       }, false);
     });
   },

@@ -9,8 +9,14 @@
 
     <script src="twitchy.js"></script>
     <script>
-      Twitchy.input('#slider', 'slider');
-      Twitchy.output('.display', 'slider');
+      Twitchy.input({
+        channel: 'live-slider',
+        selector: '#slider'
+      });
+      Twitchy.output({
+        channel: 'live-slider',
+        selector: '.display'
+      });
     </script>
   </body>
 </html>
