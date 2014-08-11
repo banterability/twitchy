@@ -6,6 +6,7 @@
     <input id="slider" type="range" min="0" max="100" value="0" step="1">
     <p>Slider says <span class="display">0</span></p>
     <p>Yes indeed, it says <span class="display">0</span></p>
+    <p>After releasing mouse: <span class="display-change">0</span></p>
 
     <script src="twitchy.js"></script>
     <script>
@@ -16,6 +17,16 @@
       Twitchy.output({
         channel: 'live-slider',
         selector: '.display'
+      });
+
+      Twitchy.input({
+        bindTo: 'change',
+        channel: 'delayed-slider',
+        selector: '#slider'
+      });
+      Twitchy.output({
+        channel: 'delayed-slider',
+        selector: '.display-change'
       });
     </script>
   </body>
