@@ -27,7 +27,7 @@ var Twitchy = {
     window.dispatchEvent(updateEvent);
   },
   output: function(options){
-    var callback, channel, elements, eventName, selector;
+    var callback, channel, elements, selector;
 
     options = options || {};
     callback = options.callback || this._defaultOutputCallback;
@@ -35,10 +35,9 @@ var Twitchy = {
     selector = options.selector;
 
     elements = document.querySelectorAll(selector);
-    eventName = 'update:' + channel;
 
     [].forEach.call(elements, function(el){
-      window.addEventListener(eventName, function(ev){
+      window.addEventListener('update:' + channel, function(ev){
         callback(ev, el);
       }, false);
     });
