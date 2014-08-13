@@ -1,8 +1,8 @@
-var Twitchy = function(){
+window.Twitchy = function(){
   var input, _defaultInputCallback, output, _defaultOutputCallback, trigger;
 
   input = function(options){
-    var bindTo, callback, channel, elements, eventCallback, selector;
+    var bindTo, callback, channel, elements, selector;
 
     options = options || {};
     bindTo = options.bindTo || 'input';
@@ -52,6 +52,8 @@ var Twitchy = function(){
   };
 
   trigger = function(options){
+    var channel, updateEvent, value;
+
     options = options || {};
     channel = options.channel;
     value = options.value;
