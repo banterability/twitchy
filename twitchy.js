@@ -17,6 +17,7 @@ window.Twitchy = function(){
         callback(ev, channel);
       }, false);
     });
+    return this;
   };
 
   _defaultInputCallback = function(ev, channel){
@@ -45,6 +46,7 @@ window.Twitchy = function(){
         callback(ev, el);
       }, false);
     });
+    return this;
   };
 
   _defaultOutputCallback = function(ev, el){
@@ -63,6 +65,7 @@ window.Twitchy = function(){
     });
 
     window.dispatchEvent(updateEvent);
+    return this;
   };
 
   return {
