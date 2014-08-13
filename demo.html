@@ -18,8 +18,7 @@
       Twitchy.input({
         channel: 'live-slider',
         selector: '#slider'
-      });
-      Twitchy.output({
+      }).output({
         channel: 'live-slider',
         selector: '.display'
       });
@@ -29,8 +28,7 @@
         bindTo: 'change',
         channel: 'delayed-slider',
         selector: '#slider'
-      });
-      Twitchy.output({
+      }).output({
         channel: 'delayed-slider',
         selector: '.display-change'
       });
