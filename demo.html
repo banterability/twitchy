@@ -3,6 +3,7 @@
   <head>
   </head>
   <body>
+    <h2>Inputs</h2>
     <input id="slider" type="range" min="0" max="100" value="0" step="1">
     <p>Slider says <span class="display">0</span></p>
     <p>Yes indeed, it says <span class="display">0</span></p>
@@ -10,6 +11,7 @@
 
     <script src="twitchy.js"></script>
     <script>
+      // Input & output using default events
       Twitchy.input({
         channel: 'live-slider',
         selector: '#slider'
@@ -19,6 +21,7 @@
         selector: '.display'
       });
 
+      // Input & output using custom events
       Twitchy.input({
         bindTo: 'change',
         channel: 'delayed-slider',
