@@ -9,6 +9,9 @@
     <p>Yes indeed, it says <span class="display">0</span></p>
     <p>After releasing mouse: <span class="display-change">0</span></p>
 
+    <h2>Arbitrary Events</h2>
+    <p>This page has been open for <span class="minutes">0</span> seconds.</p>
+
     <script src="twitchy.js"></script>
     <script>
       // Input & output using default events
@@ -31,6 +34,20 @@
         channel: 'delayed-slider',
         selector: '.display-change'
       });
+
+      // Output and arbitrary JS trigger
+      Twitchy.output({
+        channel: 'clock',
+        selector: '.minutes'
+      });
+
+      var seconds = 0;
+      setInterval(function(){
+        Twitchy.trigger({
+          channel: 'clock',
+          value: seconds += 1
+        });
+      }, 1000);
     </script>
   </body>
 </html>
