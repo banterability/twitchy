@@ -1,10 +1,12 @@
-var Twitchy = {
-  input: function(options){
+var Twitchy = function(){
+  var input, _defaultInputCallback, output, _defaultOutputCallback, trigger;
+
+  input = function(options){
     var bindTo, callback, channel, elements, eventCallback, selector;
 
     options = options || {};
     bindTo = options.bindTo || 'input';
-    callback = options.callback || this._defaultInputCallback;
+    callback = options.callback || _defaultInputCallback;
     channel = options.channel;
     selector = options.selector;
 
@@ -15,22 +17,24 @@ var Twitchy = {
         callback(ev, channel);
       }, false);
     });
-  },
-  _defaultInputCallback: function(ev, channel){
-    var updateEvent, newValue;
+  };
 
-    newValue = ev.currentTarget.value;
-    updateEvent = new CustomEvent('update:' + channel, {
-      detail: {value: newValue}
+  _defaultInputCallback = function(ev, channel){
+    var value;
+
+    value = ev.currentTarget.value;
+
+    trigger({
+      channel: channel,
+      value: value
     });
+  };
 
-    window.dispatchEvent(updateEvent);
-  },
-  output: function(options){
+  output = function(options){
     var callback, channel, elements, selector;
 
     options = options || {};
-    callback = options.callback || this._defaultOutputCallback;
+    callback = options.callback || _defaultOutputCallback;
     channel = options.channel;
     selector = options.selector;
 
@@ -41,8 +45,27 @@ var Twitchy = {
         callback(ev, el);
       }, false);
     });
-  },
-  _defaultOutputCallback: function(ev, el){
+  };
+
+  _defaultOutputCallback = function(ev, el){
     el.textContent = ev.detail.value;
-  }
-};
+  };
+
+  trigger = function(options){
+    options = options || {};
+    channel = options.channel;
+    value = options.value;
+
+    updateEvent = new CustomEvent('update:' + channel, {
+      detail: {value: value}
+    });
+
+    window.dispatchEvent(updateEvent);
+  };
+
+  return {
+    input: input,
+    output: output,
+    trigger: trigger
+  };
+}();
