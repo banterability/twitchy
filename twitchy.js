@@ -1,8 +1,12 @@
 window.Twitchy = function(){
-  var input, _defaultInputCallback, output, _defaultOutputCallback, trigger;
+  var forEachElement, input, _defaultInputCallback, output, _defaultOutputCallback, trigger;
+
+  forEachElement = function(selector, callback){
+    [].forEach.call(document.querySelectorAll(selector), callback);
+  };
 
   input = function(options){
-    var bindTo, callback, channel, elements, selector;
+    var bindTo, callback, channel, selector;
 
     options = options || {};
     bindTo = options.bindTo || 'input';
@@ -10,9 +14,7 @@ window.Twitchy = function(){
     channel = options.channel;
     selector = options.selector;
 
-    elements = document.querySelectorAll(selector);
-
-    [].forEach.call(elements, function(el){
+    forEachElement(selector, function(el){
       el.addEventListener(bindTo, function(ev){
         callback(ev, channel);
       }, false);
@@ -32,16 +34,14 @@ window.Twitchy = function(){
   };
 
   output = function(options){
-    var callback, channel, elements, selector;
+    var callback, channel, selector;
 
     options = options || {};
     callback = options.callback || _defaultOutputCallback;
     channel = options.channel;
     selector = options.selector;
 
-    elements = document.querySelectorAll(selector);
-
-    [].forEach.call(elements, function(el){
+    forEachElement(selector, function(el){
       window.addEventListener('update:' + channel, function(ev){
         callback(ev, el);
       }, false);
